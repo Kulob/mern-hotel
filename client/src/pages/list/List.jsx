@@ -18,7 +18,7 @@ const List = () => {
   const [max, setMax] = useState(undefined);
 
   const { data, loading, error, reFetch } = useFetch(
-    `https://mern-hotel-api.vercel.app/api/hotels?city=${destination}&min=${min || 0 }&max=${max || 99999}`
+    `api/hotels?city=${destination}&min=${min || 0 }&max=${max || 99999}`
   );
 
   const handleClick = () => {

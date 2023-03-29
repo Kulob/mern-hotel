@@ -60,7 +60,7 @@ const New = ({ inputs, title }) => {
     e.preventDefault();
     try {
       const newUser = {...info}
-      await axios.post('https://mern-hotel-api.vercel.app/api/auth/register', newUser)
+      await axios.post('api/auth/register', newUser)
     } catch (err) {
       console.log(err);
     }

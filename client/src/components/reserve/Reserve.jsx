@@ -10,7 +10,7 @@ import { AuthContext } from '../../context/AuthContext';
 
 const Reserve = ({setOpenModal, hotelId}) => {
   const [selectedRooms, setSelectedRooms] = useState([])
-  const {data, loading, error} = useFetch(`https://mern-hotel-api.vercel.app/api/hotels/room/${hotelId}`)
+  const {data, loading, error} = useFetch(`api/hotels/room/${hotelId}`)
   const {dates} = useContext(SearchContext)
   const navigate = useNavigate()
 

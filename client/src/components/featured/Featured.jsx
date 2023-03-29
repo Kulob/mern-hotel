@@ -3,7 +3,7 @@ import "./featured.css";
 
 const Featured = () => {
   const {data, loading, error} = useFetch(
-    "https://mern-hotel-api.vercel.app/api/hotels/countByCity?cities=москва,краснодар,туапсе"
+    "api/hotels/countByCity?cities=москва,краснодар,туапсе"
   )
   return (
     <div className="featured">

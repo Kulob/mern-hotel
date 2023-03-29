@@ -14,7 +14,7 @@ const CheckoutSuccess = () => {
   // const [destination, setDestination] = useState(location.state.destination);
   // const items = location.state.stripeData;
   // const data = location.state.data;
-  const {data, loading, error} = useFetch(`https://mern-hotel-api.vercel.app/api/hotels/find/${id}`)
+  const {data, loading, error} = useFetch(`api/hotels/find/${id}`)
   const {user} = useContext(AuthContext)
   const [orderId, setOrderId] = useState(null)
 
