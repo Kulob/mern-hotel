@@ -8,7 +8,7 @@ export default defineConfig({
     port: 8081,
     proxy: {
       '/api': {
-        target: 'http://localhost:7777',
+        target: 'https://mern-hotel-api.vercel.app',
         changeOrigin: true,
       },
     },

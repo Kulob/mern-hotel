@@ -22,7 +22,7 @@ const Orders = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const res = await axios.get(`http://localhost:7777/api/users/order/${id}`);
+        const res = await axios.get(`https://mern-hotel-api.vercel.app/api/users/order/${id}`);
         setData(res.data);
       } catch (err) {
         setError(err);
@@ -36,7 +36,7 @@ const Orders = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:7777/api/orders/${id}/${user._id}`);
+      await axios.delete(`https://mern-hotel-api.vercel.app/api/orders/${id}/${user._id}`);
       setList(list.filter((item) => item._id !== id));
     } catch (err) {}
   };

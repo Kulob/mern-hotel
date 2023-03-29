@@ -12,7 +12,7 @@ const NewRoom = () => {
   const [hotelId, setHotelId] = useState(undefined);
   const [rooms, setRooms] = useState([]);
 
-  const { data, loading, error } = useFetch("http://localhost:7777/api/hotels");
+  const { data, loading, error } = useFetch("https://mern-hotel-api.vercel.app/api/hotels");
 
   const handleChange = (e) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -22,7 +22,7 @@ const NewRoom = () => {
     e.preventDefault();
     const roomNumbers = rooms.split(",").map((room) => ({ number: room }));
     try {
-      await axios.post(`http://localhost:7777/api/rooms/${hotelId}`, { ...info, roomNumbers });
+      await axios.post(`https://mern-hotel-api.vercel.app/api/rooms/${hotelId}`, { ...info, roomNumbers });
     } catch (err) {
       console.log(err);
     }
