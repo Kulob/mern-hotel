@@ -36,7 +36,7 @@ const Hotel = () => {
 
   const {user} = useContext(AuthContext)
 
-  const {data, loading, error} = useFetch(`/hotels/find/${id}`)
+  const {data, loading, error} = useFetch(`https://mern-hotel-api.vercel.app/api/hotels/find/${id}`)
 
   const {dates, options} = useContext(SearchContext)
   const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
