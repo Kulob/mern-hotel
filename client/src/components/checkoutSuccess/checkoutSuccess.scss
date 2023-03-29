@@ -1,0 +1,17 @@
+.dashed{
+  flex: 1;
+  height: 1px;
+  border-bottom: 1px dashed #000000;
+  position: relative;
+  top: 4px;
+  margin: 0 7px;
+}
+button{
+  border: none;
+  padding: 10px 20px;
+  background-color: #0071c2;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+}
