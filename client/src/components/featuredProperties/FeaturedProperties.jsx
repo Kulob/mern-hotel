@@ -3,12 +3,12 @@ import "./featuredProperties.css";
 
 const FeaturedProperties = () => {
   const {data, loading, error} = useFetch(
-    "api/hotels?featured=true"
+    "https://mern-hotel-api.vercel.app/api/hotels?featured=true"
   )
   return (
     <div className="fp">
       {
-        loading ? ("loading"): (
+        loading ? ("loading"):(
           <>
           {data.map((item) => (
             <div className="fpItem" key={item._id}>
