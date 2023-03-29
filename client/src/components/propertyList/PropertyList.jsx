@@ -4,28 +4,8 @@ import useFetch from "../../hooks/useFetch";
 import "./propertyList.css";
 
 const PropertyList = () => {
-  const { data, loading, error } = useFetch("/hotels/countByType");
+  const { data, loading, error } = useFetch("api/hotels/countByType");
   const navigate = useNavigate()
-  // const getAllHotels = async() => {
-  //   try {
-  //     await axios.get('/hotels');
-  //     navigate('/hotels')
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // }
-  // const {reFetch} = useFetch(
-  //   `/hotels`
-  // )
-  // const reFetch = async () => {
-    
-  //   try {
-  //     const res = await axios.get('/hotels');
-  //     setData(res.data);
-  //   } catch (err) {
-  //     setError(err);
-  //   }
-  // };
 
   const getAllHotels = () => {
     navigate('/checkout-success')
