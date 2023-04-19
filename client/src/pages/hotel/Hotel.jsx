@@ -19,8 +19,6 @@ import Reserve from '../../components/reserve/Reserve';
 import { AuthContext } from '../../context/AuthContext';
 import StripeCheckout from 'react-stripe-checkout';
 import axios from '../../axios';
-import PayButton from '../../components/payButton/PayButton';
-import { url } from '../../axios';
 import { userRequest } from '../../requestMethods';
 import { format } from 'date-fns';
 

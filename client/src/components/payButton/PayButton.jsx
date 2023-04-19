@@ -1,14 +1,16 @@
-import axios from "axios";
-import { useContext } from "react";
-import { url } from "../../axios";
-import { AuthContext } from "../../context/AuthContext";
+import axios from 'axios';
+import { useContext } from 'react';
+import { url } from '../../axios';
+import { AuthContext } from '../../context/AuthContext';
+import { useSelector } from 'react-redux';
 
 const PayButton = ({ hotelItems }) => {
-  const {user} = useContext(AuthContext)
+  // const {user} = useContext(AuthContext)
+  const { user } = useSelector((state) => state.auth);
   console.log(user);
   const handleCheckout = () => {
     axios
-      .post(`${url}/stripe/create-checkout-session`, {
+      .post('https://mern-hotel-api.vercel.app/api/stripe/create-checkout-session', {
         hotelItems,
         userId: user._id,
       })
