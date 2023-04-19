@@ -1,4 +1,6 @@
 import axios from 'axios';
+// export const url = 'https://mern-hotel-api.vercel.app/api';
+export const url = 'https://mern-hotel-api.vercel.app/api';
 
 const instance = axios.create({
   // baseURL: 'http://localhost:7777/',
