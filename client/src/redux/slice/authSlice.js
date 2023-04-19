@@ -2,17 +2,21 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from '../../axios';
 
 const initialState = {
-  user: null,
+  user: JSON.parse(localStorage.getItem('user')) || null,
   token: null,
   isLoading: false,
-  status: 'loading',
+  status: null,
 };
 export const registerUser = createAsyncThunk('/api/auth/register', async (params) => {
   try {
     const { data } = await axios.post('/api/auth/register', params);
-    if (data.token) {
-      window.localStorage.setItem('token', data.token);
+    if (data.user) {
+      localStorage.setItem('user', JSON.stringify(data.user));
     }
+    if (data.token) {
+      localStorage.setItem('token', JSON.stringify(data.token));
+    }
+    console.log(data);
     return data;
   } catch (error) {
     console.log(error);
@@ -24,9 +28,13 @@ export const loginUser = createAsyncThunk('/api/auth/login', async ({ username, 
       username,
       password,
     });
+    if (data.details) {
+      localStorage.setItem('user', JSON.stringify(data.details));
+    }
+    console.log(data);
     return data;
   } catch (error) {
-    console.log(error);
+    alert(error.response.data.message);
   }
 });
 
@@ -34,17 +42,6 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    // registerStart: (state) => {
-    //   state.isLoading = true;
-    // },
-    // registerSuccess: (state, action) => {
-    //   state.isLoading = false;
-    //   state.user = action.payload;
-    // },
-    // registerFailure: (state) => {
-    //   state.isLoading = false;
-    //   state.error = true;
-    // },
     logout: (state) => {
       state.user = null;
       state.token = null;
@@ -75,19 +72,20 @@ export const authSlice = createSlice({
     },
     [loginUser.fulfilled]: (state, action) => {
       state.isLoading = false;
-      // state.status = action.payload.message;
-      state.user = action.payload.user;
-      // state.token = action.payload.token;
+      state.status = action.payload.message;
+      state.user = action.payload;
+      state.token = action.payload.token;
     },
     [loginUser.rejected]: (state, action) => {
+      state.user = null;
       state.isLoading = false;
-      // state.status = action.payload.message;
+      state.status = action.payload.message;
     },
   },
 });
 
 export const checkIsAuth = (state) => Boolean(state.auth.token);
-export const { registerStart, registerSuccess, registerFailure, logout } = authSlice.actions;
+export const { logout } = authSlice.actions;
 export default authSlice.reducer;
 
 // import { createSlice } from '@reduxjs/toolkit';

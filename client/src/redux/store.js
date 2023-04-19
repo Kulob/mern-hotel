@@ -14,7 +14,7 @@
 // import { PersistGate } from 'redux-persist/integration/react';
 
 // const persistConfig = {
-//   key: 'booking',
+//   key: 'hotel',
 //   version: 1,
 //   storage,
 // };

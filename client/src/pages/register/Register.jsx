@@ -1,85 +1,4 @@
-// import React, { useEffect, useState } from 'react'
-// import { useDispatch, useSelector } from 'react-redux'
-// import { Link, useNavigate } from 'react-router-dom'
-// import { toast } from 'react-toastify'
-// import { checkIsAuth, registerUser } from '../../redux/slice/authSlice'
-// import './register.css'
-
-// const Register = () => {
-//   const [username, setUsername] = useState('')
-//   const [email, setEmail] = useState('')
-//   const [password, setPassword] = useState('')
-//   const dispatch = useDispatch();
-//   const {status} = useSelector((state) => state.auth)
-//   const isAuth = useSelector(checkIsAuth)
-//   const navigate = useNavigate()
-
-//   useEffect(()=>{
-//     if (status) {
-//       toast(status)
-//     }
-//     if (isAuth) {
-//       navigate('/')
-//     }
-//   },[status, isAuth, navigate])
-//   const handleSubmit = () =>{
-//     try {
-//       dispatch(registerUser({username,email, password}))
-//       setUsername('')
-//       setEmail('')
-//       setPassword('')
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   }
-//   return (
-//     <div className="login">
-//       <div className="lContainer">
-//         <input
-//           type="text"
-//           placeholder="username"
-//           id="username"
-//           value={username}
-//           onChange={(e) => setUsername(e.target.value)}
-//           className="lInput"
-//         />        
-//         <input
-//           type="email"
-//           placeholder="Email"
-//           id="email"
-//           value={email}
-//           onChange={(e) => setEmail(e.target.value)}
-//           className="lInput"
-//         />
-//         <input
-//           type="password"
-//           placeholder="password"
-//           id="password"
-//           value={password}
-//           onChange={(e) => setPassword(e.target.value)}
-//           className="lInput"
-//         />
-//         <button onClick={handleSubmit} className="lButton">
-//         Зарегистрироваться
-//         </button>
-//         <Link to='/login'
-//         // className=' flex justify-center items-center text-white text-xs'
-//         >Уже зарегистирированы??
-//         </Link>
-//         {/* {error && <span>{error.message}</span>} */}
-//       </div>
-//     </div>
-//   )
-// }
-
-// export default Register
-
 import React,{ useState, useEffect } from "react";
-// import "./new.scss";
-// import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
-// import Sidebar from "../../components/Sidebar";
-// import Navbar from "../../components/navbar/Navbar";
-// import axios from "axios";
 import './register.scss'
 import {storage } from '../../firebase'
 import { ref, uploadBytesResumable,getDownloadURL } from "firebase/storage";
@@ -112,14 +31,11 @@ const Register = ({ inputs, title }) => {
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log("Upload is " + progress + "% done");
           setPerc(progress);
           switch (snapshot.state) {
             case "paused":
-              console.log("Upload is paused");
               break;
             case "running":
-              console.log("Upload is running");
               break;
             default:
               break;
@@ -153,11 +69,11 @@ const Register = ({ inputs, title }) => {
       navigate('/')
     }
   },[status, isAuth, navigate])
+
   const handleClick = async(e) => {
     e.preventDefault();
     try {
       const newUser = {...info}
-      console.log(newUser);
       await dispatch(registerUser(newUser))
     } catch (err) {
       console.log(err);
@@ -183,7 +99,7 @@ const Register = ({ inputs, title }) => {
             />
           </div>
           <div className="right">
-            <form>
+            <form onSubmit={handleClick}>
               <div className="formInput">
                 <label htmlFor="file">
                   Image: <FontAwesomeIcon icon={faDownload} />

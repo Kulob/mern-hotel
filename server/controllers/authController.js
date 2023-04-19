@@ -12,6 +12,7 @@ export const register = async (req, res, next) => {
       ...req.body,
       password: hash,
     });
+    await newUser.save();
 
     const token = jwt.sign(
       {
@@ -22,23 +23,35 @@ export const register = async (req, res, next) => {
         expiresIn: '30d',
       },
     );
+    const { passwordHash, ...userData } = newUser._doc;
+    // res.status(200).send('User has been created.');
     res.json({
+      user: { ...userData },
       token,
-      newUser,
-      message: 'Регистрация прошла успешно!!!',
+      message: 'Регистрация прошла успешно!',
     });
-    await newUser.save();
   } catch (err) {
-    next(err);
+    console.log(err);
+    res.status(500).json({
+      message: 'Не удалось зарегистрироваться!',
+    });
   }
 };
 export const login = async (req, res, next) => {
   try {
     const user = await User.findOne({ username: req.body.username });
-    if (!user) return next(createError(404, 'User not found!'));
+    if (!user) {
+      return res.status(404).json({
+        message: 'Пользователь не найден',
+      });
+    }
 
     const isPasswordCorrect = await bcrypt.compare(req.body.password, user.password);
-    if (!isPasswordCorrect) return next(createError(400, 'Wrong password or username!'));
+    if (!isPasswordCorrect) {
+      return res.status(400).json({
+        message: 'Неверный логин или пароль',
+      });
+    }
 
     const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, process.env.JWT);
 
@@ -48,9 +61,11 @@ export const login = async (req, res, next) => {
         httpOnly: true,
       })
       .status(200)
-      .json({ details: { ...otherDetails }, isAdmin });
+      .json({ details: { ...otherDetails }, isAdmin, token, message: 'Успешно!' });
   } catch (err) {
-    next(err);
+    res.status(500).json({
+      message: ' Не удалось авторизовать',
+    });
   }
 };
 
