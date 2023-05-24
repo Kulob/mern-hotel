@@ -25,7 +25,7 @@ const Featured = () => {
 
           <div className="featuredItem">
             <img
-              src="https://www.ridus.ru/images/2021/12/22/1382875/in_article_b0ac359241.jpg"
+              src="https://mykaleidoscope.ru/x/uploads/posts/2022-09/1663254836_12-mykaleidoscope-ru-p-nochnoi-krasnodar-krasivo-12.jpg"
               alt=""
               className="featuredImg"
             />

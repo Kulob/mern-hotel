@@ -50,9 +50,12 @@ const Reserve = ({ setOpenModal, hotelId }) => {
     try {
       await Promise.all(
         selectedRooms.map((roomId) => {
-          const res = axios.put(`/rooms/availability/${roomId}`, {
-            dates: alldates,
-          });
+          const res = axios.put(
+            `https://mern-hotel-api.vercel.app/api/rooms/availability/${roomId}`,
+            {
+              dates: alldates,
+            },
+          );
           return res.data;
         }),
       );
